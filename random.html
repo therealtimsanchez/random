@@ -1,0 +1,71 @@
+<html ng-app="Assignment1">
+    <head>
+        <h1>Nickname Generator</h1>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-animate.min.js"></script>
+        <script lang="javascript">
+        
+            var myModule = angular.module('Assignment1', ['ngAnimate']);
+            
+           
+            myModule.controller('ContactsController', 
+                function ($scope) {
+                    var cc = this;
+                    cc.people = [
+                        {name:''}
+                    ];
+                    
+                    cc.add = function add(){
+                        cc.people.push(
+                        {name:cc.name}
+                        );
+                    }                    
+                }
+            );
+            
+            myModule.controller('PersonController', 
+                function ($scope) {
+                    var pc = this;
+                }
+            );
+      
+            
+        </script>
+        <style>
+            .gray { background: #eee; }
+            
+            .person.ng-enter,
+            .person.ng-leave{
+                -webkit-transition:0.5s linear all;
+                transition:0.5s linear all;
+            }
+            
+            .person.ng-enter,
+            .person.ng-leave.ng-leave-active{
+                opacity:0;
+            }
+            
+            .person.ng-leave,
+            .person.ng-enter.ng-enter-active {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    
+    <body ng-controller="ContactsController as cc">
+        <div>
+            Enter your name to get a nickname <input type="text" ng-model="cc.name"><br>
+
+        </div>
+        <br>
+        <button ng-click="cc.add()">Generate a nickname</button>
+        <div ng-repeat="person in cc.people" ng-controller="PersonController as pc"
+             ng-class-odd="'gray'" class="person">
+        A$AP {{person.name}}
+        </div>
+        
+    
+        
+    </body>
+</html>
